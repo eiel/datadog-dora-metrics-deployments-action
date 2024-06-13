@@ -22,22 +22,26 @@ inputs:
 
 
 runs:
-  using: 'docker'
-  image: "docker://datadog/ci:latest"
-  env:
-    DD_BETA_COMMANDS_ENABLED: 1
-  args:
-    - dora
-    - deployment
-    - --service
-    - ${{ inputs.service-name }}
-    - --env
-    - ${{ inputs.datadog-env }}
-    - --started-at            
-    - ${{ inputs.started-at }}
-    - --finished-at
-    - ${{ inputs.finished-at }}
-    - --git-repository-url
-    - ${{ inputs.git-repository-url || '$GITHUB_SERVER_URL/$GITHUB_REPOSITORY' }}
-    - --git-commit-sha
-    - ${{ inputs.git-commit-sha || '$GITHUB_SHA' }}
+  using: 'composite'
+  steps:
+    - run: echo repository-url=${INPUTS_REPOSITORY_URL:=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY} >> "${GITHUB_ENV}"
+    - run: echo git-commit-sha=${INPUTS_GIT_COMMIT_SHA:=$GITHUB_SHA} >> "${GITHUB_ENV}"
+
+    - uses: "docker://datadog/ci:latest"
+      env:
+        DD_BETA_COMMANDS_ENABLED: 1
+      args:
+        - dora
+        - deployment
+        - --service
+        - ${{ inputs.service-name }}
+        - --env
+        - ${{ inputs.datadog-env }}
+        - --started-at
+        - ${{ inputs.started-at }}
+        - --finished-at
+        - ${{ inputs.finished-at }}
+        - --git-repository-url
+        - ${{ env.git-repository-url }}
+        - --git-commit-sha
+        - ${{ env.git-commit-sha }}
