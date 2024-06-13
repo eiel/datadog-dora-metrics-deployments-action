@@ -24,6 +24,8 @@ inputs:
 runs:
   using: 'docker'
   image: "docker://datadog/ci:latest"
+  env:
+    DD_BETA_COMMANDS_ENABLED: 1
   args:
     - dora
     - deployment
