@@ -17,8 +17,8 @@ jobs:
         with:
           docker-image-tag: latest
           service-name: eiel/datadog-dora-metrics-deployments-action
-          datadog-env: ${{ env.GITHUB_REF }}
+          datadog-env: ${{ github.ref_name }}
           started-at: ${{ env.deploy-started-at }}
           finished-at: "$(date +%s)"
-          git-repository-url: "${{ format('{0}/{1}', env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
+          git-repository-url: "${{ github.repository }}"
           git-commit-sha: "${{ env.GITHUB_SHA }}"
