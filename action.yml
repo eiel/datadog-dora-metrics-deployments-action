@@ -20,11 +20,12 @@ inputs:
   git-commit-sha:
     description: ''
 
+env:
+  DD_BETA_COMMANDS: 1
+
 runs:
   using: 'docker'
   image: "docker://datadog/ci:latest"
-  env:
-   DD_BETA_COMMANDS: 1
   args:
     - dora
     - deployment
