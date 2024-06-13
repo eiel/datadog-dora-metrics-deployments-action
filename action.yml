@@ -20,8 +20,6 @@ inputs:
   git-commit-sha:
     description: ''
 
-env:
-  DD_BETA_COMMANDS: 1
 
 runs:
   using: 'docker'
