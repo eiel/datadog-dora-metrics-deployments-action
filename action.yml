@@ -22,7 +22,7 @@ inputs:
 
 runs:
   using: 'docker'
-  image: 'docker://datadog/ci:"${{ inputs.docker-image-tag }}"'
+  image: "docker://datadog/ci:${{ inputs.docker-image-tag }}"
   env:
    DD_BETA_COMMANDS: 1
   args:
