@@ -25,7 +25,9 @@ runs:
   using: 'composite'
   steps:
     - run: echo repository-url=${INPUTS_REPOSITORY_URL:=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY} >> "${GITHUB_ENV}"
+      shell: bash
     - run: echo git-commit-sha=${INPUTS_GIT_COMMIT_SHA:=$GITHUB_SHA} >> "${GITHUB_ENV}"
+      shell: bash
 
     - uses: "docker://datadog/ci:latest"
       env:
