@@ -25,5 +25,5 @@ jobs:
           datadog-env: ${{ github.ref_name }}
           started-at: ${{ env.deploy-started-at }}
           finished-at: "${{ env.deploy-finished-at }}"
-          git-repository-url: "${{ format('{0}/{1}', github.url, github.repository) }}"
+          git-repository-url: "${{ format('{0}/{1}', github.server_url, github.repository) }}"
           git-commit-sha: "${{ github.sha }}"
