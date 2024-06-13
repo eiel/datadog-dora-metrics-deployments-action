@@ -30,14 +30,14 @@ runs:
     - dora
     - deployment
     - --service
-    - "${{ inputs.service-name }}"
+    - ${{ inputs.service-name }}
     - --env
-    - "${{ inputs.datadog-env }}"
+    - ${{ inputs.datadog-env }}
     - --started-at            
-    - "${{ inputs.started-at }}"
+    - ${{ inputs.started-at }}
     - --finished-at
-    - "${{ inputs.finished-at }}"
+    - ${{ inputs.finished-at }}
     - --git-repository-url
-    - "${{ inputs.git-repository-url || $GITHUB_SERVER_URL/$GITHUB_REPOSITORY) }}"
+    - ${{ inputs.git-repository-url || "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY)" }}
     - --git-commit-sha
-    - "${{ inputs.git-commit-sha || $GITHUB_SHA }}"
+    - ${{ inputs.git-commit-sha || "$GITHUB_SHA" }}
