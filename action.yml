@@ -17,7 +17,7 @@ inputs:
     default: "$(date +%s)"
   git-repository-url:
     description: 'url of target repository'
-    default: "${{ format('{0}/{1}'), env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
+    default: "${{ format('{0}/{1}', env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
   git-commit-sha:
     description: ''
     default: ${{ env.GITHUB_SHA }}
