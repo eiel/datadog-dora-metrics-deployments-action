@@ -3,7 +3,7 @@ on: [push]
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: ci
     steps:
       - name: record deploy start time
         run: echo deploy-started-at="$(date +%s)" >> "${GITHUB_ENV}"
@@ -13,12 +13,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: record deploy start time
+        run: echo deploy-finished-at="$(date +%s)" >> "${GITHUB_ENV}"
+
       - uses: ./ # Uses an action in the root directory
         with:
           docker-image-tag: latest
           service-name: eiel/datadog-dora-metrics-deployments-action
           datadog-env: ${{ github.ref_name }}
           started-at: ${{ env.deploy-started-at }}
-          finished-at: "$(date +%s)"
+          finished-at: "${{ env.deploy-finished-at }}"
           git-repository-url: "${{ github.repository }}"
           git-commit-sha: "${{ env.GITHUB_SHA }}"
