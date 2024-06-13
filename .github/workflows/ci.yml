@@ -13,6 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: sleep 3
+
       - name: record deploy start time
         run: echo deploy-finished-at="$(date +%s)" >> "${GITHUB_ENV}"
 
