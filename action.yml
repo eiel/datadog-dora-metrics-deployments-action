@@ -12,38 +12,35 @@ inputs:
     description: 'env in datadog'
   started-at:
     description: 'start datetime of deploy'
+    required: true
   finished-at:
     description: 'finished datetime of deploy'
-    default: "$(date +%s)"
   git-repository-url:
     description: 'url of target repository'
   git-commit-sha:
     description: ''
 
+env:
+  git-repository-url: "${{ format('{0}/{1}', github.server_url, github.repository) }}"
+  git-commit-sha: "${{ github.sha }}"
 
 runs:
-  using: 'composite'
-  steps:
-    - run: echo repository-url=${INPUTS_REPOSITORY_URL:=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY} >> "${GITHUB_ENV}"
-      shell: bash
-    - run: echo git-commit-sha=${INPUTS_GIT_COMMIT_SHA:=$GITHUB_SHA} >> "${GITHUB_ENV}"
-      shell: bash
-
-    - uses: "docker://datadog/ci:latest"
-      env:
-        DD_BETA_COMMANDS_ENABLED: 1
-      args:
-        - dora
-        - deployment
-        - --service
-        - ${{ inputs.service-name }}
-        - --env
-        - ${{ inputs.datadog-env }}
-        - --started-at
-        - ${{ inputs.started-at }}
-        - --finished-at
-        - ${{ inputs.finished-at }}
-        - --git-repository-url
-        - ${{ env.git-repository-url }}
-        - --git-commit-sha
-        - ${{ env.git-commit-sha }}
+  using: 'docker'
+  image: "docker://datadog/ci:latest"
+  env:
+    DD_BETA_COMMANDS_ENABLED: 1
+  args:
+    - dora
+    - deployment
+    - --service
+    - ${{ inputs.service-name }}
+    - --env
+    - ${{ inputs.datadog-env }}
+    - --started-at
+    - ${{ inputs.started-at }}
+    - --finished-at
+    - ${{ inputs.finished-at }}
+    - --git-repository-url
+    - ${{ env.git-repository-url }}
+    - --git-commit-sha
+    - ${{ env.git-commit-sha }}
