@@ -21,8 +21,8 @@ inputs:
     description: ''
 
 env:
-  git-repository-url: "${{ format('{0}/{1}', github.server_url, github.repository) }}"
-  git-commit-sha: "${{ github.sha }}"
+  git-repository-url: "${{ format('{0}/{1}', env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
+  git-commit-sha: "${{ env.GITHUB_SHA }}"
 
 runs:
   using: 'docker'
