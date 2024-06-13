@@ -1,6 +1,4 @@
 on: [push]
-env:
-  DD_BETA_COMMANDS: 1
 
 jobs:
   hello_world_job:
