@@ -1,15 +1,41 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  docker-image-tag:
+    # @see https://hub.docker.com/r/datadog/ci/tags
+    description: 'image tag of datadog/ci'
+    default: 'latest'
+  service-name:
+    description: 'service name in datadog'
     required: true
-    default: 'World'
+  datadog-env:
+    description: 'env in datadog'
+  started-at:
+    description: 'start datetime of deploy'
+  finished-at:
+    description: 'finished datetime of deploy'
+    default: "$(date +%s)"
+  git-repository-url:
+    description: 'url of target repository'
+    default: "${{ format('{0}/{1}'), env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
+  git-commit-sha:
+    description: ''
+    default: ${{ env.GITHUB_SHA }}
 outputs:
   time: # id of output
     description: 'The time we greeted you'
 runs:
   using: 'docker'
-  image: 'docker://datadog/ci:latest'
+  image: 'docker://datadog/ci:"${docker-image-tag}"'
+  env:
+   DD_BETA_COMMANDS: 1
   args:
-    - ${{ inputs.who-to-greet }}
+    - dora
+    - deployment
+    - --service "${{ inputs.service-name }}"
+    - --env "${{ inputs.datadog-env }}"
+    - --started-at "${{ inputs.started-at }}"
+    - --finished-at "${{ inputs.finished-at }}"
+    - --git-repository-url "${{ inputs.$git-commit-sha }}"
+    - --git-commit-sha "${{ inputs.git-commit-sha }}"
+
