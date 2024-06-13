@@ -38,6 +38,6 @@ runs:
     - --finished-at
     - "${{ inputs.finished-at }}"
     - --git-repository-url
-    - "${{ inputs.git-repository-url || format('{0}/{1}', env.SERVER_URL, env.GITHUB_REPOSITORY) }}"
+    - "${{ inputs.git-repository-url || $GITHUB_SERVER_URL/$GITHUB_REPOSITORY) }}"
     - --git-commit-sha
-    - "${{ inputs.git-commit-sha || env.GITHUB_SHa }}"
+    - "${{ inputs.git-commit-sha || $GITHUB_SHA }}"
