@@ -31,7 +31,7 @@ runs:
     - "${{ inputs.service-name }}"
     - --env
     - "${{ inputs.datadog-env }}"
-    - --started-at"
+    - --started-at            
     - "${{ inputs.started-at }}"
     - --finished-at
     - "${{ inputs.finished-at }}"
