@@ -17,6 +17,8 @@ jobs:
         run: echo deploy-finished-at="$(date +%s)" >> "${GITHUB_ENV}"
 
       - uses: ./ # Uses an action in the root directory
+        env:
+          DD_API_KEY: ${{ secrets.DD_API_KEY }}
         with:
           docker-image-tag: latest
           service-name: eiel/datadog-dora-metrics-deployments-action

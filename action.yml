@@ -26,7 +26,6 @@ runs:
   image: "docker://datadog/ci:latest"
   env:
     DD_BETA_COMMANDS_ENABLED: 1
-    DD_API_KEY: ${{ secrets.DD_API_KEY }}
   args:
     - dora
     - deployment
