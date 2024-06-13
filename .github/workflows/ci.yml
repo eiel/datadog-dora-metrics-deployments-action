@@ -24,4 +24,4 @@ jobs:
           started-at: ${{ env.deploy-started-at }}
           finished-at: "${{ env.deploy-finished-at }}"
           git-repository-url: "${{ github.repository }}"
-          git-commit-sha: "${{ env.GITHUB_SHA }}"
+          git-commit-sha: "${{ github.sha }}"

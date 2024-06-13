@@ -28,10 +28,16 @@ runs:
   args:
     - dora
     - deployment
-    - --service "${{ inputs.service-name }}"
-    - --env "${{ inputs.datadog-env }}"
-    - --started-at "${{ inputs.started-at }}"
-    - --finished-at "${{ inputs.finished-at }}"
-    - --git-repository-url "${{ inputs.git-repository-url }}"
-    - --git-commit-sha "${{ inputs.git-commit-sha }}"
+    - --service
+    - "${{ inputs.service-name }}"
+    - --env
+    - "${{ inputs.datadog-env }}"
+    - --started-at"
+    - "${{ inputs.started-at }}"
+    - --finished-at
+    - "${{ inputs.finished-at }}"
+    - --git-repository-url
+    - "${{ inputs.git-repository-url }}"
+    - --git-commit-sha
+    - "${{ inputs.git-commit-sha }}"
 
