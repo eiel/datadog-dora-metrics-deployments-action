@@ -1,18 +1,19 @@
 FROM datadog/ci:latest
 
-# ENV DD_SERVICE
-# ENV DD_ENV
-# ENV DD_SITE
-# ENV STARTED_AT
-# ENV FINISHED_AT
-# ENV GITHUB_SERVER_URL
-# ENV GITHUB_REPOSITORY
-# ENV GITHUB_SHA
-
+# use docker-ci env var
+ENV DD_SERVICE=
+ENV DD_ENV=
+ENV DD_SITE=
 ENV DD_BETA_COMMANDS_ENABLED=1
+
+ENV STARTED_AT=
+ENV FINISHED_AT=
+ENV GITHUB_SERVER_URL=
+ENV GITHUB_REPOSITORY=
+ENV GITHUB_SHA=
 
 CMD datadog-ci dora deployment \
   --started-at $STARTED_AT \
-  --finished-at ${FINISH_AT:$(date +$%s)}\
+  --finished-at ${FINISHED_AT:$(date +$%s)}\
   --git-repository-url ${GITHUB_SERVER_URL}/${GITHUB_REPOSTORY} \
-  --git-commit-sha ${GITHUB_SHA} \
+  --git-commit-sha ${GITHUB_SHA}
