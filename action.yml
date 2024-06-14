@@ -24,7 +24,6 @@ runs:
   using: 'docker'
   image: "Dockerfile"
   env:
-    DD_BETA_COMMANDS_ENABLED: 1
     STARTED_AT: ${{ inputs.started-at }}
     FINISHED_AT: ${{ inputs.finished-at }}
     DD_SERVICE: ${{ inputs.service-name }}

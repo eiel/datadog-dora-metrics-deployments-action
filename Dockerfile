@@ -9,6 +9,8 @@ FROM datadog/ci:latest
 # ENV GITHUB_REPOSITORY
 # ENV GITHUB_SHA
 
+ENV DD_BETA_COMMANDS_ENABLED=1
+
 CMD datadog-ci dora deployment \
   --started-at $STARTED_AT \
   --finished-at ${FINISH_AT:$(date +$%s)}\
