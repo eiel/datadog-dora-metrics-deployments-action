@@ -5,7 +5,7 @@ inputs:
     description: 'service name in datadog'
   datadog-env:
     description: 'env name in datadog'
-  datado-api-key:
+  datadog-api-key:
     description: 'DataDog API Acckess Key'
   started-at:
     description: 'start datetime of deploy'
