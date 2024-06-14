@@ -1,4 +1,4 @@
-FROM datadog/ci:latest
+FROM datadog/ci:v2.37.0
 
 # use docker-ci env var
 ENV DD_SERVICE=
