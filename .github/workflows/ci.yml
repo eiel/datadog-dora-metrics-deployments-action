@@ -1,20 +1,27 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  delivery:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: ci
     steps:
+      - name: record deploy start time
+        run: echo deploy-started-at="$(date +%s)" >> "${GITHUB_ENV}"
+
       # To use this repository's private action,
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
-        id: hello
-        with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
 
+      - run: sleep 3
+
+      - name: record deploy start time
+        run: echo deploy-finished-at="$(date +%s)" >> "${GITHUB_ENV}"
+
+      - uses: ./ # Uses an action in the root directory
+        with:
+          datadog-service-name: eiel/datadog-dora-metrics-deployments-action
+          datadog-api-key: ${{ secrets.DD_API_KEY }}
+          datadog-env: ${{ github.ref_name }}
+          started-at: ${{ env.deploy-started-at }}
+          finished-at: "${{ env.deploy-finished-at }}"

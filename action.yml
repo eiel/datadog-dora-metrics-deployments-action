@@ -1,15 +1,28 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'send deployment event to Datadog DORA Metrics'
+description: 'send deployment event to Datadog Dora Metrics https://docs.datadoghq.com/dora_metrics/'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+  datadog-service-name:
+    description: 'service name in datadog'
+  datadog-env:
+    description: 'env name in datadog'
+  datadog-api-key:
+    description: 'DataDog API Acckess Key'
+  started-at:
+    description: 'start datetime of deploy'
     required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+  finished-at:
+    description: 'finished datetime of deploy. default is now time'
+  git-repository-url:
+    description: 'url of target repository. default is current repository'
+  git-commit-sha:
+    description: 'git commit sha of deployment. default is GITHUB_SHA'
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.who-to-greet }}
+  env:
+    DD_SERVICE: ${{ inputs.datadog-service-name }}
+    DD_ENV: ${{ inputs.datadog-env }}
+    DD_API_KEY: ${{ inputs.datadog-api-key }}
+    STARTED_AT: ${{ inputs.started-at }}
+    FINISHED_AT: ${{ inputs.finished-at }}
