@@ -21,7 +21,7 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   env:
-    DD_SERVICE: ${{ inputs.service-name }}
+    DD_SERVICE: ${{ inputs.datadog-service-name }}
     DD_ENV: ${{ inputs.datadog-env }}
     DD_API_KEY: ${{ inputs.datadog-api-key }}
     STARTED_AT: ${{ inputs.started-at }}

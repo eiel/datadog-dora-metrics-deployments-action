@@ -32,9 +32,14 @@ deloyment finish time (sec)
 
 ### `git-repository-url`
 
+**unimplement**
+
 git repository url of deployment. default current repository.
 
+
 ### `git-commit-sha`
+
+**unimplement**
 
 git commit sha of deployment. default current commit sha.
 
