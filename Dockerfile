@@ -9,7 +9,7 @@ FROM datadog/ci:latest
 # ENV GITHUB_REPOSITORY
 # ENV GITHUB_SHA
 
-RUN dora deployment \
+CMD datadog-ci dora deployment \
   --started-at $STARTED_AT \
   --finished-at ${FINISH_AT:$(date +$%s)}\
   --git-repository-url ${GITHUB_SERVER_URL}/${GITHUB_REPOSTORY} \
