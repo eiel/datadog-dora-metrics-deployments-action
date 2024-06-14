@@ -20,27 +20,12 @@ inputs:
   git-commit-sha:
     description: ''
 
-env:
-  git-repository-url: "${{ format('{0}/{1}', env.GITHUB_SERVER_URL, env.GITHUB_REPOSITORY) }}"
-  git-commit-sha: "${{ env.GITHUB_SHA }}"
-
 runs:
   using: 'docker'
-  image: "docker://datadog/ci:latest"
+  image: "Dockerfile"
   env:
     DD_BETA_COMMANDS_ENABLED: 1
-  args:
-    - dora
-    - deployment
-    - --service
-    - ${{ inputs.service-name }}
-    - --env
-    - ${{ inputs.datadog-env }}
-    - --started-at
-    - ${{ inputs.started-at }}
-    - --finished-at
-    - ${{ inputs.finished-at }}
-    - --git-repository-url
-    - ${{ env.git-repository-url }}
-    - --git-commit-sha
-    - ${{ env.git-commit-sha }}
+    STARTED_AT: ${{ inputs.started-at }}
+    FINISHED_AT: ${{ inputs.finished-at }}
+    DD_SERVICE: ${{ inputs.service-name }}
+    DD_ENV: ${{ inputs.datadog-env }}
