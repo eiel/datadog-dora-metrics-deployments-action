@@ -54,14 +54,12 @@ steps:
 
   - run: xxxxxxxxx # delivery code
 
-  - uses: eiel/datadog-dora-metrics-deployment
-    env:
-      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+  - uses: eiel/datadog-dora-metrics-deployment@v0.0.2
     with:
-      service-name: eiel/datadog-dora-metrics-deployments-action
-      datadog-env: ${{ github.ref_name }}
+      datadog-service-name: "your service"
+	  datadog-api-key: ${{ secrets.DD_API_KEY }}
+      datadog-env: "production"
       started-at: ${{ env.deploy-started-at }}
-      finished-at: "${{ env.deploy-finished-at }}"
 ```
 
 # Links
