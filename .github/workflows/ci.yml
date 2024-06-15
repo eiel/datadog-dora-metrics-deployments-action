@@ -9,8 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     name: ci
     steps:
-      - name: record deploy start time
-        run: echo deploy-started-at="$(date +%s)" >> "${GITHUB_ENV}"
+      - id: deploy-start
+        name: record deploy start time
+        run: echo unix-time="$(date +%s)" >> "${GITHUB_OUTPUT}"
 
       # To use this repository's private action,
       # you must check out the repository
@@ -19,13 +20,9 @@ jobs:
 
       - run: sleep 3
 
-      - name: record deploy start time
-        run: echo deploy-finished-at="$(date +%s)" >> "${GITHUB_ENV}"
-
       - uses: ./ # Uses an action in the root directory
         with:
           datadog-service-name: eiel/datadog-dora-metrics-deployments-action
           datadog-api-key: ${{ secrets.DD_API_KEY }}
           datadog-env: ${{ github.ref_name }}
-          started-at: ${{ env.deploy-started-at }}
-          finished-at: "${{ env.deploy-finished-at }}"
+          started-at: ${{ steps.deploy-start.outputs.unix-time }}
