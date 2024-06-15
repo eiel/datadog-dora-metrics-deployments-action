@@ -49,17 +49,18 @@ git commit sha of deployment. default current commit sha.
 ```yaml
 
 steps:
-  - name: record deploy start time
-    run: echo deploy-started-at="$(date +%s)" >> "${GITHUB_ENV}"
+  - id: deploy-start
+    name: record deploy start time
+    run: echo unix-time="$(date +%s)" >> "${GITHUB_OUTPUT}"
 
   - run: xxxxxxxxx # delivery code
 
   - uses: eiel/datadog-dora-metrics-deployment@v0.0.2
     with:
       datadog-service-name: "your service"
-	  datadog-api-key: ${{ secrets.DD_API_KEY }}
+      datadog-api-key: ${{ secrets.DD_API_KEY }}
       datadog-env: "production"
-      started-at: ${{ env.deploy-started-at }}
+      started-at: ${{ steps.deploy-start.outputs.unix-time }}
 ```
 
 # Links
