@@ -58,7 +58,7 @@ steps:
   - uses: eiel/datadog-dora-metrics-deployment@v0.0.2
     with:
       datadog-service-name: "your service"
-	  datadog-api-key: ${{ secrets.DD_API_KEY }}
+      datadog-api-key: ${{ secrets.DD_API_KEY }}
       datadog-env: "production"
       started-at: ${{ steps.deploy-start.outputs.unix-time }}
 ```
