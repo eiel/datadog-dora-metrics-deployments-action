@@ -18,8 +18,8 @@ inputs:
     description: 'git commit sha of deployment. default is GITHUB_SHA'
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: 'node20'
+  image: 'src/index.js'
   env:
     DD_SERVICE: ${{ inputs.datadog-service-name }}
     DD_ENV: ${{ inputs.datadog-env }}

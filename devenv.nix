@@ -26,6 +26,10 @@
 
   # https://devenv.sh/languages/
   # languages.nix.enable = true;
+  laguages {
+    javascript.enable = true;
+    typescript.enable = true;
+  };
 
   # https://devenv.sh/pre-commit-hooks/
   pre-commit.hooks = {
