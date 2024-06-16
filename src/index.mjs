@@ -35,8 +35,8 @@ export function postDeploymentRequest() {
     env: env["INPUT_DATADOG-ENV"],
     started_at: Number((env["INPUT_STARTED-AT"]) ?? 0) * 1e12,
     finished_at: Number(env["INPUT_FINISHED-AT"]) * 1e12 || Date.now() * 1e6,
-    commit_sha: env["INPUT_GIT-COMMIT-SHA"] ?? env.GITHUB_SHA,
-    repostiory_url: env["INPUT_GIT-EPOSITORY-URL"] ?? `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`,
+    commit_sha: env["INPUT_GIT-COMMIT-SHA"] || env.GITHUB_SHA,
+    repostiory_url: env["INPUT_GIT-REPOSITORY-URL"] || `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`,
   };
 }
 
@@ -48,7 +48,7 @@ export async function run() {
   const params = postDeploymentRequest();
   try {
     println(JSON.stringify(params));
-    const response = await fetch(createRequest(request));
+    const response = await fetch(createRequest(params));
     if (!response.ok) {
       throw new Error(`response error code: ${response.status}`)
     }
