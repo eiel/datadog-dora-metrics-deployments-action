@@ -36,7 +36,7 @@ export function postDeploymentRequest() {
     started_at: Number(env["INPUT_STARTED-AT"]) * 1e9,
     finished_at: (Number(env["INPUT_FINISHED-AT"]) * 1e9) || Date.now() * 1e6,
     commit_sha: env["INPUT_GIT-COMMIT-SHA"] || env.GITHUB_SHA,
-    repostiory_url: env["INPUT_GIT-REPOSITORY-URL"] || `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`,
+    repository_url: env["INPUT_GIT-REPOSITORY-URL"] || `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`,
   };
 }
 
