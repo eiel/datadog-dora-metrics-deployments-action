@@ -33,8 +33,8 @@ export function postDeploymentRequest() {
     api_key: env["INPUT_DATADOG-API-KEY"],
     service: env["INPUT_DATADOG-SERVICE-NAME"],
     env: env["INPUT_DATADOG-ENV"],
-    started_at: (Number(env["INPUT_STARTED-AT"]) * 1e9).toString(),
-    finished_at: (Number(env["INPUT_FINISHED-AT"]) * 1e9 || Date.now() * 1e6).toString(),
+    started_at: Number(env["INPUT_STARTED-AT"]) * 1e9),
+    finished_at: Number(env["INPUT_FINISHED-AT"]) * 1e9 || Date.now() * 1e6,
     commit_sha: env["INPUT_GIT-COMMIT-SHA"] || env.GITHUB_SHA,
     repostiory_url: env["INPUT_GIT-REPOSITORY-URL"] || `${env.GITHUB_SERVER_URL}/${env.GITHUB_REPOSITORY}`,
   };
