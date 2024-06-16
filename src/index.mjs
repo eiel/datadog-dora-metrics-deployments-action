@@ -50,7 +50,8 @@ export async function run() {
     println(JSON.stringify(params));
     const response = await fetch(createRequest(params));
     if (!response.ok) {
-      throw new Error(`response error code: ${response.status} ${response.type} ${response.text()}`)
+      const t  = await response.text();
+      throw new Error(`response error code: ${response.status} ${response.type} ${t}`)
     }
     println(JSON.stringify(response.json()));
     println(response.error);
