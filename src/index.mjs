@@ -1,7 +1,7 @@
 import { env } from 'process';
 import { EOL }  from 'os';
 
-function createRequest({ dd_host, api_key, service, env, started_at, finished_at, commit_sha, repository_url }) {
+export function createRequest({ dd_host, api_key, service, env, started_at, finished_at, commit_sha, repository_url }) {
   const url = `https://api.${dd_host}/api/v2/dora/deployment`;
   return new Request(url, {
     method: 'POST',
@@ -46,9 +46,9 @@ function println(line) {
 
 export async function run() {
   const request = postDeploymentRequest();
-  println(request.text());
   try {
     const res = await fetch(request);
+    println(request.text());
     println(res.ok);
     println(res.status);
     println(JSON.stringify(res.json()));
