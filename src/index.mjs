@@ -32,7 +32,7 @@ export function postDeploymentRequest() {
       dd_host: env.DD_SITE || 'datadoghq.com',
       api_key: env["INPUT_DATADOG-API-KEY"],
       service: env["INPUT_DATADOG-SERVICE-NAME"],
-      env: env.["INPUT_DATADOG-ENV"],
+      env: env["INPUT_DATADOG-ENV"],
       started_at: Number(env[INPUT_started-at]) * 1e12,
       finished_at: Number(env["INPUT_FINISHED-AT"]) * 1e12 ?? Date.now() * 1e6,
       commit_sha: env["INPUT_GIT-COMMIT-SHA"] ?? env.GITHUB_SHA,
