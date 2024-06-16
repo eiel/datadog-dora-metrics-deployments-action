@@ -29,7 +29,7 @@ function createRequest({ dd_host, api_key, service, env, started_at, finished_at
 
 export function postDeploymentRequest() {
   return createRequest({
-    dd_host: env.DD_SITE || 'datadoghq.com',
+    dd_host: env.DD_SITE ?? 'datadoghq.com',
     api_key: env["INPUT_DATADOG-API-KEY"],
     service: env["INPUT_DATADOG-SERVICE-NAME"],
     env: env["INPUT_DATADOG-ENV"],
@@ -46,10 +46,13 @@ function println(line) {
 
 export async function run() {
   const request = postDeploymentRequest();
+  println(request.toString());
   try {
     const res = await fetch(request);
-    println(res.status)
+    println(res.ok);
+    println(res.status);
     println(JSON.stringify(res.json()));
+    println(res.error());
   } catch(e) {
     println(e.toString());
   }
