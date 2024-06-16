@@ -23,7 +23,8 @@ function createRequest({ dd_host, api_key, service, env, started_at, finished_at
 	  }
 	}
       }
-    });
+    }),
+  });
 }
 
 export function postDeploymentRequest() {
