@@ -44,7 +44,7 @@ function println(line) {
   process.stdout.write(line + EOL);
 }
 
-export function async run() {
+export async function run() {
   const request = postDeploymentRequest();
   try {
     const res = await fetch(request);
