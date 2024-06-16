@@ -56,7 +56,7 @@ export async function run() {
     println(response.error);
   } catch(e) {
     println(e.toString());
-    throw;
+    throw
   }
 }
 
