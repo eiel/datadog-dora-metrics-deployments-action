@@ -46,13 +46,13 @@ function println(line) {
 
 export async function run() {
   const request = postDeploymentRequest();
-  println(request.toString());
+  println(request.text());
   try {
     const res = await fetch(request);
     println(res.ok);
     println(res.status);
     println(JSON.stringify(res.json()));
-    println(res.error());
+    println(res.error);
   } catch(e) {
     println(e.toString());
   }
