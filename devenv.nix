@@ -26,7 +26,7 @@
 
   # https://devenv.sh/languages/
   # languages.nix.enable = true;
-  laguages {
+  languages = {
     javascript.enable = true;
     typescript.enable = true;
   };
