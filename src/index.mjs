@@ -48,7 +48,7 @@ export async function run() {
   const request = postDeploymentRequest();
   try {
     const res = await fetch(request);
-    println(res.text());
+    println(JSON.stringify(res.json()));
   } catch(e) {
     println(e.toString());
   }
