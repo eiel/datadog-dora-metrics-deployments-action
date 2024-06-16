@@ -47,12 +47,12 @@ function println(line) {
 export async function run() {
   const request = postDeploymentRequest();
   try {
-    const res = await fetch(request);
-    println(request.text());
-    println(res.ok);
-    println(res.status);
-    println(JSON.stringify(res.json()));
-    println(res.error);
+    const response = await fetch(request);
+    if (!response.ok) {
+      throw new Error(`response error code: ${response.status}`)
+    }
+    println(JSON.stringify(response.json()));
+    println(response.error);
   } catch(e) {
     println(e.toString());
   }
