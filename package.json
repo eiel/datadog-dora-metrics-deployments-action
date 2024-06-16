@@ -5,6 +5,7 @@
   "author": "",
   "private": true,
   "homepage": "https://github.com/actions/typescript-action",
+  "type": "moudle",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/actions/typescript-action.git"

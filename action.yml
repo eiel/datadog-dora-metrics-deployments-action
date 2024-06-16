@@ -19,4 +19,4 @@ inputs:
 
 runs:
   using: 'node20'
-  main: 'src/index.js'
+  main: 'src/index.mjs'
