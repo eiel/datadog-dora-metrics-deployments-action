@@ -47,6 +47,7 @@ function println(line) {
 export async function run() {
   const request = postDeploymentRequest();
   try {
+    println(`env ${env[INPUT_STARTED-AT"]}`)
     const response = await fetch(request);
     if (!response.ok) {
       throw new Error(`response error code: ${response.status}`)
@@ -55,6 +56,7 @@ export async function run() {
     println(response.error);
   } catch(e) {
     println(e.toString());
+    throw;
   }
 }
 
